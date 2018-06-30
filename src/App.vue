@@ -4,7 +4,11 @@
       app
       :clipped-left="clipped"
     >
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-toolbar-items>
+        <v-btn flat ripple @click="$router.push('/')">На главную</v-btn>
+        <v-btn flat ripple @click="$router.push('/news')">Новости</v-btn>
+        <v-btn flat ripple @click='alert()'>Профиль</v-btn>
+      </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>menu</v-icon>
@@ -33,8 +37,12 @@ export default {
       }],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+      rightDrawer: false
+    }
+  },
+  methods: {
+    news () {
+      this.$router.push('/news')
     }
   },
   name: 'App'
