@@ -20,6 +20,7 @@ const router = new Router({routes, mode: 'history'})
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const authUser = JSON.parse(window.localStorage.getItem('login'))
+    // Если пользователь не авторизован, перемещаем его на страницу /login //
     if (!authUser) {
       next({
         path: '/login'
@@ -28,28 +29,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   }
-  metaControl(to, from, next)
-})
-
-function metaControl (to, from, next) {
-  const nearestWithTitle = to.matched.slice().reverse().find(r => r.meta && r.meta.title)
-  const nearestWithMeta = to.matched.slice().reverse().find(r => r.meta && r.meta.meta_tags)
-  if (nearestWithTitle) document.title = nearestWithTitle.meta.title
-
-  Array.from(document.querySelectorAll('[data-vue-router-controlled]')).map(el => el.parentNode.removeChild(el))
-  if (!nearestWithMeta) return next()
-
-  nearestWithMeta.meta.meta_tags.map(tagDef => {
-    const tag = document.createElement('meta')
-
-    Object.keys(tagDef).forEach(key => {
-      tag.setAttribute(key, tagDef[key])
-    })
-    tag.setAttribute('data-vue-router-controlled', '')
-
-    return tag
-  }).forEach(tag => document.head.appendChild(tag))
   next()
-}
+})
 
 export default router

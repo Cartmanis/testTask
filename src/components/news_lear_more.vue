@@ -15,7 +15,7 @@
               {{news.description}}
             </div>
             <div>
-              <v-btn @click="more(index)"> Подробнее</v-btn>
+              <v-btn @click="back"> назад</v-btn>
             </div>
           </v-card-title>
         </v-card>
@@ -30,15 +30,15 @@
   import {store} from '../store/strore'
   export default {
     name: 'news_lear_more',
-    props: ['id'],
     computed: {
       news () {
         return store.getters.getOneNews(this.$route.params.id)
       }
+    },
+    methods: {
+      back () {
+        this.$router.go(-1)
+      }
     }
   }
 </script>
-
-<style scoped>
-
-</style>

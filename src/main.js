@@ -15,9 +15,9 @@ import {
   VToolbar,
   VCard,
   VPagination,
-  VToolTip,
+  VTooltip,
   VForm,
-  VtextField,
+  VTextField,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -34,9 +34,9 @@ Vue.use(Vuetify, {
     VToolbar,
     VCard,
     VPagination,
-    VToolTip,
+    VTooltip,
     VForm,
-    VtextField,
+    VTextField,
     transitions
   }
 })

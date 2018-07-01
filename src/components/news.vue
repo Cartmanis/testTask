@@ -1,6 +1,4 @@
-/* eslint-disable */
 <template>
-
   <v-container>
     <v-layout>
        <v-flex xs12 sm6 offset-sm3>
@@ -15,9 +13,6 @@
                   </h3>
                 </div>
                 <div>
-                  {{news.description}}
-                </div>
-                <div>
                   <v-btn @click="more(index)"> Подробнее</v-btn>
                 </div>
               </v-card-title>
@@ -25,14 +20,13 @@
           </v-card>
           <br />
       </template>
-        <v-pagination
-          v-model="page"
-          :length="itemsNews.length / 2"
-          @input="next"
-          visible="3"
-          circle
-        ></v-pagination>
-
+        <!--<v-pagination-->
+          <!--v-model="page"-->
+          <!--:length="itemsNews.length / 2"-->
+          <!--@input="next"-->
+          <!--visible="3"-->
+          <!--circle-->
+        <!--&gt;</v-pagination>-->
     </v-flex>
     </v-layout>
   </v-container>
@@ -43,9 +37,7 @@
   export default {
     data () {
       return {
-        count: 3,
-        page: 1,
-        tempItem: []
+        page: 1
       }
     },
     computed: {
@@ -53,27 +45,21 @@
         return store.getters.getNews
       }
     },
-    watch: {
-      count () {
-        return this.itemsNews.slice(1, 3)
-      }
-    },
     mounted: function () {
+      // Проверка необходима для предотвращения повторного заполнения массива с новостями //
       if (store.getters.getNews.length === 0) {
+        // Получает новости из Googla News //
         this.setItemsNewsDefault()
       }
     },
     methods: {
-      next () {
-        this.count += 1
-      },
       setItemsNewsDefault () {
         controllers.getNews().then(function (resopnse) {
           if (resopnse.status === 200) {
             store.commit('setNews', resopnse.data.articles)
           }
         }).catch(function (error) {
-          console.log(error)
+          alert(error)
         })
       },
       more (index) {
