@@ -6,9 +6,13 @@
 - Google News API
 
 **Сборка и запуск проекта**
+
 **Способ 1:**
-Я собрал и загрузил готовый образ на Dockerhub
+
+Готовый образ выложен на Dockerhub
+
 https://hub.docker.com/r/farex/news/
+
 Скачайте образ
 
 ```bash
@@ -16,11 +20,12 @@ https://hub.docker.com/r/farex/news/
 ```
 и запустите командой 
 ```bash
-➜ docker run -it -d --name news -p 9090:80 news
+➜ docker run -it -d --name news -p 9090:80 farex/news
 ```
 Перейдите в браузере по ссылке
- http://localhost:8787
+ http://localhost:9090
 **Способ 2**:
+
 В корне проекта находится Dockerfile в котором указаны все необходимые параметры сборки образа
 ```bash $
 ➜ git clone https://github.com/fgituser/testTask.git
