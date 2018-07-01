@@ -46,7 +46,7 @@ news                latest              ffbf2f47d0b4        About an hour ago   
 !#bin/bash
 docker run -it -d --name news -p 8787:80 news
 ```
-имените параметр **-p** если порт 8787 у вас занать., например так:
+измените параметр **-p** если порт 8787 у вас занят., например так:
 ```bash
 docker run -it -d --name news -p 9090:80 news
 ```
