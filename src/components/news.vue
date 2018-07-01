@@ -1,13 +1,13 @@
+/* eslint-disable */
 <template>
 
   <v-container>
-    <v-flex xs12 sm6 offset-sm3>
-
+    <v-layout>
+       <v-flex xs12 sm6 offset-sm3>
         <template v-for="(news, index) in itemsNews">
           <v-card>
 
-            <v-card-media :src="news.urlToImage" height="200px">
-            </v-card-media>
+            <v-card-media :src="news.urlToImage" height="200px"></v-card-media>
               <v-card-title primary-title>
                 <div>
                   <h3 class="headline mb-0">
@@ -20,16 +20,21 @@
                 <div>
                   <v-btn @click="more(index)"> Подробнее</v-btn>
                 </div>
-
               </v-card-title>
 
-
-        </v-card>
-        <br />
+          </v-card>
+          <br />
       </template>
+        <v-pagination
+          v-model="page"
+          :length="itemsNews.length / 2"
+          @input="next"
+          visible="3"
+          circle
+        ></v-pagination>
 
     </v-flex>
-
+    </v-layout>
   </v-container>
 </template>
 <script>
@@ -38,12 +43,19 @@
   export default {
     data () {
       return {
-        // itemsNews: []
+        count: 3,
+        page: 1,
+        tempItem: []
       }
     },
     computed: {
       itemsNews () {
         return store.getters.getNews
+      }
+    },
+    watch: {
+      count () {
+        return this.itemsNews.slice(1, 3)
       }
     },
     mounted: function () {
@@ -52,6 +64,9 @@
       }
     },
     methods: {
+      next () {
+        this.count += 1
+      },
       setItemsNewsDefault () {
         controllers.getNews().then(function (resopnse) {
           if (resopnse.status === 200) {

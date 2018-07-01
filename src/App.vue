@@ -7,12 +7,10 @@
       <v-toolbar-items>
         <v-btn flat ripple @click="$router.push('/')">На главную</v-btn>
         <v-btn flat ripple @click="$router.push('/news')">Новости</v-btn>
-        <v-btn flat ripple @click='alert()'>Профиль</v-btn>
+        <v-btn flat ripple @click="$router.push('/profile')">Профиль</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>menu</v-icon>
-      </v-btn>
+
     </v-toolbar>
     <v-content>
       <router-view/>
@@ -25,24 +23,12 @@
 </template>
 
 <script>
+
 export default {
   data () {
     return {
       clipped: false,
-      drawer: true,
-      fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false
-    }
-  },
-  methods: {
-    news () {
-      this.$router.push('/news')
+      fixed: false
     }
   },
   name: 'App'
