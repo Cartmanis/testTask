@@ -8,18 +8,28 @@ import Profile from '@/components/profile'
 
 Vue.use(Router)
 
+const isAuth = (to, from, next) => {
+  const authUser = JSON.parse(window.localStorage.getItem('login'))
+
+  if (authUser) {
+    next()
+    return
+  }
+  next('/login')
+}
+
 const routes = [
   {path: '/', component: Index},
   {path: '/login', component: Login},
   {path: '/news', component: News},
   {path: '/news/:id', component: NewsLearMore},
-  {path: '/profile', component: Profile, meta: {requiresAuth: true}}
+  {path: '/profile', component: Profile, beforeEnter: isAuth}
 ]
 
 const router = new Router({routes, mode: 'history'})
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
-    const authUser = JSON.parse(window.localStorage.getItem('login'))
+
     // Если пользователь не авторизован, перемещаем его на страницу /login //
     if (!authUser) {
       next({
@@ -30,6 +40,6 @@ router.beforeEach((to, from, next) => {
     }
   }
   next()
-})
+}) */
 
 export default router
